@@ -2,8 +2,8 @@
 
 
 def main():
-    from gendiff.gendiff_help import help_print
-    help_print()
+    from gendiff.gendiff import generate_diff
+    generate_diff()
 
 
 if __name__ == '__main__':
