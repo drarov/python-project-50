@@ -1,16 +1,10 @@
-import argparse
 import json
 
 
-def generate_diff():
-    parser = argparse.ArgumentParser(description='Compares two configuration files and shows a difference.')
-    parser.add_argument('first_file')
-    parser.add_argument('second_file')
-    parser.add_argument('-f', '--format', help='set format of output')
-    args = parser.parse_args()
-    with open(args.first_file, 'r') as file1:
+def generate_diff(file_path1, file_path2):
+    with open(file_path1, 'r') as file1:
         data1 = json.load(file1)
-    with open(args.second_file, 'r') as file2:
+    with open(file_path2, 'r') as file2:
         data2 = json.load(file2)
     set1 = set(data1)
     set2 = set(data2)
@@ -32,6 +26,6 @@ def generate_diff():
         diff_dict.update(inter_dict2)
         diff_dict.update(inter_dict3)
 
-    diff_dict_sorted = dict(sorted(diff_dict.items(), key=lambda x: (x[0][2:], x[0][0])))
+    diff_dict_sorted = dict(sorted(diff_dict.items(), key=lambda x: (x[0][2:])))
     output_dict = json.dumps(diff_dict_sorted, indent=2).replace(',', '').replace('"', '')
-    print(output_dict)
+    return output_dict
