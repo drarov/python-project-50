@@ -1,4 +1,4 @@
 linter: #Checking two repositories with linter
-	flake8 .\gendiff\ .\tests\
+	python3 -m flake8 ./gendiff ./tests
 
 
