@@ -1,16 +1,16 @@
-import json
+"""Comparing two flat json files."""
 
-'''Comparing two flat json files'''
+import json
 
 
 def json_open(file_path):
-    """Opening some json file"""
+    """Opening some json file."""
     with open(file_path, 'r') as file:
         return json.load(file)
 
 
 def generate_diff(path1, path2):
-    """A main function which creates a comparison of two flat json files"""
+    """A main function which creates a comparison of two flat json files."""
     data1 = json_open(path1)
     data2 = json_open(path2)
     difference1 = set(data1) - set(data2)
