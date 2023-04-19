@@ -8,7 +8,7 @@ test-coverage:
 	poetry run pytest --cov=hexlet_python_package --cov-report xml
 
 lint:
-	poetry run flake8 --extend-ignore=WPS,DAR,RST,B,C,D,E,I,N,P,Q,S,T,W gendiff
+	poetry run flake8 --extend-ignore=C901 gendiff
 
 selfcheck:
 	poetry check
