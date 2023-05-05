@@ -7,7 +7,7 @@ import argparse
 
 
 def main():
-    """A function that creates description in terminal."""
+    """A function that creates description in terminal. """
     parser = argparse.ArgumentParser(
         description='Compares two configuration files and shows a difference.')
     parser.add_argument('first_file')
