@@ -4,6 +4,7 @@ import json
 import yaml
 from formatters.plain import plain
 from formatters.stylish import keys_recovery, format_dict
+from formatters.json import format_json
 
 
 def file_opener(file_path):
@@ -24,8 +25,10 @@ def generate_diff(path1, path2, format_name='stylish'):
         return format_dict(keys_recovery(diff))
     elif format_name == 'plain':
         return plain(diff)
+    elif format_name == 'json':
+        return format_json(diff)
     else:
-        return '"format_name" is not applicable, put the valid format name'
+        return '"format_name" is not applicable, please enter a valid format name'
 
 
 def structure(first_dict, second_dict):
