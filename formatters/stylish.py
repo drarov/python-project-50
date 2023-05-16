@@ -11,7 +11,7 @@ def format_dict(my_dict):
             else:
                 result.append('{}{}: {}'.format(' ' * indent, key, value))
         return result
-    formatted_str = '{\n'+'\n'.join(inner(my_dict))+'\n}'
+    formatted_str = '{\n%s\n}' % ('\n'.join(inner(my_dict)))
     return formatted_str.replace("True", 'true').replace("False", 'false').replace("None", "null")
 
 
