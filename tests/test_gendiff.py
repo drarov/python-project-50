@@ -106,7 +106,7 @@ def test_generate_diff4():
         }
         setting6: {
             doge: {
-              - wow: 
+              - wow:
               + wow: so much
             }
             key: value

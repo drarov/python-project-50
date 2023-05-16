@@ -9,7 +9,7 @@ def format_dict(my_dict):
                 result.extend(inner(value, indent + 4))
                 result.append('{}}}'.format(' ' * (indent + 4)))
             else:
-                result.append('{}{}: {}'.format(' ' * indent, key, value))
+                result.append('{}{}:{}{}'.format(' ' * indent, key, ' ' if value != '' else '', value))
         return result
     formatted_str = '{\n%s\n}' % ('\n'.join(inner(my_dict)))
     return formatted_str.replace("True", 'true').replace("False", 'false').replace("None", "null")
