@@ -44,11 +44,11 @@ def plain(inside):
     for item in result_list:
         lst_with_newlines.extend(item)
     result_str = '\n'.join(lst_with_newlines)
-    return result_str.replace("'True'", 'true').replace("'False'", 'false').replace("'None'", "null")
+    return result_str.replace("'None'", "null").replace("False", "false").replace("True", "true")
 
 
-def int_checker(val):
-    if isinstance(val, int):
-        return val
+def int_checker(value):
+    if isinstance(value, int):
+        return value
     else:
-        return f"'{val}'"
+        return f"'{value}'"
