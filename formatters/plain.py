@@ -18,23 +18,37 @@ def plain(inside):
 
     def inner(some_dict):
         result = []
+
         for key, val in some_dict.items():
             if isinstance(val, dict):
-                result.extend(inner(val))
+                if key[2:4] == '--':
+                    result.append([f"Property '{path(full_dict, key)}' was updated. From [complex value] to {int_checker(some_dict[f'  ++{key[4:]}'])}"])
+                elif key[2:4] == '++':
+                    result.append([f"Property '{path(full_dict, key)}' was updated. From {int_checker(some_dict[f'  --{key[4:]}'])} to [complex value]"])
+                else:
+                    result.extend(inner(val))
             if key[2:4] == '- ':
                 result.append([f"Property '{path(full_dict, key)}' was removed"])
             if key[2:4] == '+ ' and isinstance(val, dict):
                 result.append([f"Property '{path(full_dict, key)}' was added with value: [complex value]"])
             if key[2:4] == '+ ' and not isinstance(val, dict):
-                result.append([f"Property '{path(full_dict, key)}' was added with value: '{val}'"])
-            if key[2:4] == '--' and isinstance(val, dict):
-                result.append([f"Property '{path(full_dict, key)}' was updated. From [complex value] to '{some_dict[f'  ++{key[4:]}']}'"])
+                result.append([f"Property '{path(full_dict, key)}' was added with value: {int_checker(val)}"])
             if key[2:4] == '--' and not isinstance(val, dict):
-                result.append([f"Property '{path(full_dict, key)}' was updated. From '{val}' to '{some_dict[f'  ++{key[4:]}']}'"])
+                if not isinstance(some_dict[f'  ++{key[4:]}'], dict):
+                    result.append([f"Property '{path(full_dict, key)}' was updated. From {int_checker(some_dict[f'  --{key[4:]}'])} to {int_checker(some_dict[f'  ++{key[4:]}'])}"])
+
         return result
+
     result_list = inner(same)
     lst_with_newlines = []
     for item in result_list:
         lst_with_newlines.extend(item)
     result_str = '\n'.join(lst_with_newlines)
     return result_str.replace("'True'", 'true').replace("'False'", 'false').replace("'None'", "null")
+
+
+def int_checker(val):
+    if isinstance(val, int):
+        return val
+    else:
+        return f"'{val}'"
